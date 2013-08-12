@@ -1,55 +1,35 @@
 require 'spec_helper'
 
-describe "StaticPages" do
+describe "Static pages" do
   
-  let(:base_title) { "Bespoke Tailor Application"}
+  subject { page }
   
   describe "Home page" do
-    it "should have the content 'Title'" do
-      visit root_path
-      expect(page).to have_content('Home')
-    end
+    before { visit root_path }
     
-    it "should have the correct title" do
-      visit '/static_pages/home'
-      expect(page).to have_title("#{base_title} | Home")
-    end
+    it { should have_content('Bespoke App') }
+    it { should have_title(full_title('')) }
+    it { should_not have_title('Home') }
   end
   
   describe "About page" do
-    it "should have the content 'About Us'" do
-      visit '/static_pages/about'
-      expect(page).to have_content('About Us')
-    end
+    before { visit about_path }
     
-    it "should have the correct title" do
-      visit '/static_pages/about'
-      expect(page).to have_title("#{base_title} | About Us")
-    end
-  end  
-  
+    it { should have_content('About') }
+    it { should have_title(full_title('About Us')) }
+  end
+
   describe "Help page" do
-    it "should have the content 'Help'" do
-      visit '/static_pages/help'
-      expect(page).to have_content('Help')
-    end
+    before { visit help_path }
     
-    it "should have the correct title" do
-      visit '/static_pages/help'
-      expect(page).to have_title("#{base_title} | Help")
-    end
-  end  
+      it { should have_content('Help') }
+      it { should have_title(full_title('Help')) }
+   end  
   
   describe "Contact page" do
+    before { visit contact_path }
     
-    it "should have the content 'Contact'" do
-      visit contact_path
-      expect(page).to have_content('Contact')
-    end
-  
-    it "should have the correct title" do
-      visit contact_path
-      expect(page).to have_title("#{base_title} | Contact Us")
-    end
-  end  
-end
+   it { should have_content('Contact') }
+   it { should have_title(full_title('Contact')) }
+  end
+end 
